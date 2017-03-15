@@ -5,7 +5,7 @@ import {togglePad, advanceTick} from '../actions'
 import Count from '../components/Count'
 import {instruments, song} from '../parameters/audioparams'
 import {getActiveColumns} from '../selectors/activecolumnsSelector'
-import {counts, pads, countIds} from '../orm/selectors';
+import {counts, pads} from '../orm/selectors';
 
 
 const MatrixContainer = ({
@@ -22,7 +22,7 @@ const MatrixContainer = ({
 
 
 const mapStateToProps = (state, ownProps) => ({
-    counts: countIds(state).filter(count=>(count.instrument.name=== ownProps.instrument)),
+    counts: counts(state).filter(count=>(count.instrument.name=== ownProps.instrument)),
     pads: pads(state).map(padObj=> {
       const obj = {
         id: padObj.id,

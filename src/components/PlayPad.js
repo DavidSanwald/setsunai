@@ -45,20 +45,12 @@ transition: opacity 500ms cubic-bezier(0,1,1,0)  ;
   }
 `;
 
-const PlayPad = ({
-    id,
-    kling,
-    pulse,
-    onPadClick,
-    active,
-    klang,
-    color,
-    pitch,
-    ...props
-}) => (
-    <StyledPlayPad key={id} id={id} onClick={onPadClick} kling={kling} active={active} color={color} pulse={pulse} {...props}>
+class PlayPad extends React.PureComponent{
+  render() {
+    return (
+    <StyledPlayPad key={this.props.id} id={this.props.id} onClick={this.props.onPadClick} kling={this.props.kling} active={this.props.active} color={this.props.color} pulse={this.props.pulse}>
         &nbsp;
     </StyledPlayPad>
-)
+)}}
 
 export default PlayPad;
