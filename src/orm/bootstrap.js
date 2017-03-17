@@ -20,7 +20,7 @@ export default function bootstrap(orm) {
     });
     const harmony = Instrument.create({
         name: 'Harmony', // optional. If omitted, Redux-ORM uses a number sequence starting from 0.
-        duration: 16,
+        duration: 32,
         barLength: 8,
     });
     const tmp = [0, 1, 2, 3, 4, 5, 6, 7]

@@ -1,77 +1,89 @@
 // @flow
-import React from 'react';
-import styled, {keyframes} from 'styled-components';
-import StyledPad from '../sharedcomponents/StyledPad';
+import React from "react";
+import styled, { keyframes, css } from "styled-components";
+import StyledPad from "../sharedcomponents/StyledPad";
 
 function animationBG(props) {
-    return keyframes `
+  return keyframes`
     from {
-      background-color: ${props.theme[props.kling]};
+      background-color: ${props.theme[props.color]};
     }
   `;
 }
 
-function animation(props) {
-    return keyframes `
+function animationColor(props) {
+  return keyframes`
     from {
-      background-color: ${props.theme['base']};
+      background-color: ${props.theme["base"]};
     }
     to {
-      background-color: ${props.theme[props.kling]};
+      background-color: ${props.theme[props.color]};
     }
   `;
 }
-function animationGRAD(props) {
-    return keyframes `
-    from {
-      background-position:50% 0%;
-    }
-  `;
-}
+function testanimation(props) {
+  return keyframes`
 
+    to {
+      opacity: 0.8;
+    }
+  `;
+}
 
 const StyledPlayPad = styled(StyledPad)`
-background-color: ${props => props.pulse
-    ? props.theme[props.color]
-    : props.theme['base']};
-        opacity: ${props => props.active
-        ? 0.9
-        : 1};
-transition: background-color 5s cubic-bezier(.17,.67,.83,.67)  ;
-transition: opacity 500ms cubic-bezier(0,1,1,0)  ;
+background-color: ${props => props.pulse ? props.theme[props.color] : props.theme["base"]};
+        opacity: ${props => props.active ? 0.9 : 1};
+transition: background-color 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)  ;
+transition: opacity 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275)  ;
+${props => {
+  if (props.mono && props.pulse) {
+    // Returning a template literal with interpolations? You need to use `css`
+    return css`
+            animation:  ${testanimation(props)} 0.5s 0.3s infinite alternate;
+        `;
+  } else if (props.mono === true) {
+    console.log("YO");
+    return css`
+            background-color: ${props => props.theme[props.color]};
+        `;
+  } else {
+    // Returning a standard string? No need to use `css`
+    return null;
+  }
+}}
+
 
 &:hover {
     opacity: 0.7;
   }
 `;
 
-class PlayPad extends React.PureComponent{
-  componentDidUpdate(prevProps) {
-  Object.keys(this.props).forEach(key => {
-    if (this.props[key] !== prevProps[key]) {
-      console.log(key, "changed from", prevProps[key], "to", this.props[key]);
+class PlayPad extends React.PureComponent {
+  shouldComponentUpdate(nextProps) {
+    if (
+      this.props.pulse !== nextProps.pulse ||
+      this.props.active !== nextProps.active ||
+      this.props.color !== nextProps.color
+    ) {
+      return true;
     }
-  });
-}
-  shouldComponentUpdate (nextProps) {
-    // have any of the items changed?
-    if(this.props.pulse=== nextProps.pulse){
-        return true;
-    }
-    // everything from here is horrible.
-
-    // if interaction has not changed at all then when can return false (yay!)
-    if(this.props.active){
-        return true;
-    }
-    return false
+    return false;
   }
 
   render() {
     return (
-    <StyledPlayPad key={this.props.id} id={this.props.id} onClick={this.props.onPadClick} kling={this.props.kling} active={this.props.active} color={this.props.color} pulse={this.props.pulse}>
-        &nbsp;
-    </StyledPlayPad>
-)}}
+      <StyledPlayPad
+        mono={this.props.mono}
+        key={this.props.id}
+        id={this.props.id}
+        onClick={this.props.onPadClick}
+        kling={this.props.kling}
+        active={this.props.active}
+        color={this.props.color}
+        pulse={this.props.pulse}
+      />
+    );
+  }
+}
 
 export default PlayPad;

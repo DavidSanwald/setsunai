@@ -17,7 +17,7 @@ export default function ticker(store) {
     }
 
     this.scheduler = () => {
-        if (this.futureTickTime < this.audioContext.currentTime + 0.00001) {
+        if (this.futureTickTime < this.audioContext.currentTime + 0.0001) {
             this.playTick(store);
         }
         window.setTimeout(this.scheduler, 0);

@@ -1,10 +1,10 @@
 // @flow
-import React from 'react'
-import styled, { keyframes } from 'styled-components';
-import StyledPad from '../sharedcomponents/StyledPad'
+import React from "react";
+import styled, { keyframes } from "styled-components";
+import StyledPad from "../sharedcomponents/StyledPad";
 
 function animation(props) {
-    return keyframes `
+  return keyframes`
 
     to {
       opacity: 0.925;
@@ -12,7 +12,7 @@ function animation(props) {
   `;
 }
 
-const StyledPadToggle = styled(StyledPad) `
+const StyledPadToggle = styled(StyledPad)`
 background-color: ${props => props.theme[props.kling]};
 width: 100%;
 
@@ -21,18 +21,15 @@ width: 100%;
   }
 `;
 
-const PadToggle = ({
+const PadToggle = (
+  {
     kling,
     onPadClick,
     active,
     klang,
     colours,
-    pitch,
-    ...props
-}) => (
-    <StyledPadToggle onClick={onPadClick}  colours={colours} kling={kling}  >
-        &nbsp;
-    </StyledPadToggle>
-)
+    pitch
+  }
+) => <StyledPadToggle onClick={onPadClick} colours={colours} kling={kling} />;
 
 export default PadToggle;
