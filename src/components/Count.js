@@ -1,8 +1,8 @@
 /* @flow */
 import React from 'react'
 import PlayPadContainer from '../containers/PlayPadContainer'
-
 import styled from "styled-components"
+import {pure} from 'recompose'
 
 const StyledCount = styled.div`
 display: flex;
@@ -18,4 +18,4 @@ const Count = ({children, ...props}) => (
 
 );
 
-export default Count;
+export default pure(Count);

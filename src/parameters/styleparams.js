@@ -51,5 +51,6 @@ export const colours4 = {
     3: '#306E73',
     4: '#3B424C',
     5: '#2F8058',
-    base: '#1D181F'
+    base:  '#3e3f3a',
+    base2: '#01545a',
 }
