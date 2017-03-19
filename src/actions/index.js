@@ -2,7 +2,7 @@
 import * as types from '../constants/ActionTypes'
 
 
-export const togglePad = id => ({type: types.TOGGLE_PAD, payload: id})
+export const togglePad = (id) => ({type: types.TOGGLE_PAD, payload: id})
 
 export const advanceTick = () => ({type: types.ADVANCE_TICK})
 

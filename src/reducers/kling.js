@@ -1,4 +1,3 @@
-// @flow
 import {TOGGLE_KLING} from '../constants/ActionTypes'
 
 

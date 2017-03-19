@@ -7,9 +7,6 @@ import { instruments, song } from "../parameters/audioparams";
 import StyledPad from "../sharedcomponents/StyledPad";
 import PadToggle from "./PadToggle";
 import MainWrapper from "../layout/MainWrapper";
-import Perf from "react-addons-perf";
-
-window.Perf = Perf;
 
 class App extends React.Component {
   render() {

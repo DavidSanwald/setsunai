@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PlayPad from "../components/PlayPad";
 import { togglePad } from "../actions";
-import { counts, pads, playingPads } from "../orm/selectors";
+import { counts, pads, pulsingPads } from "../orm/selectors";
 
 const mapStateToProps = (state, ownProps) => {
   const mono = pads(state).filter(pad => pad.id === ownProps.id)[0]["mono"]
@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => {
   mono: pads(state).filter(pad => pad.id === ownProps.id)[0]["mono"],
   active: pads(state).filter(pad => pad.id === ownProps.id)[0]["active"],
   pitch: pads(state).filter(pad => pad.id === ownProps.id)[0]["pitch"],
-  pulse: playingPads(state)
+  pulse: pulsingPads(state)
     .reduce((a, b) => a.concat(b))
     .filter(pad => pad.id === ownProps.id).length === 1,
   color: mono

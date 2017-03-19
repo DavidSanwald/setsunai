@@ -35,7 +35,31 @@ export const activeCounts = createSelector(
         return obj;
       })
       .filter(
-        count => Math.floor((tick / count.duration % count.barLength)) === count.position
+        count =>
+          tick / count.duration % count.barLength === count.position
+      );
+  })
+);
+
+export const activeCountsPulse = createSelector(
+  ormSelector,
+  state => state.tick,
+  ormCreateSelector(orm, (session, tick) => {
+    return session.Count
+      .all()
+      .toModelArray()
+      .map(count => {
+        const activePads = count.pads.filter({ active: true }).toRefArray();
+        const obj = Object.assign({}, count.ref);
+        obj.duration = count.instrument.duration;
+        obj.barLength = count.instrument.barLength;
+        obj.pads = activePads;
+
+        return obj;
+      })
+      .filter(
+        count =>
+          Math.floor(tick / count.duration % count.barLength) === count.position
       );
   })
 );
@@ -59,6 +83,16 @@ export const activePads = createSelector(
 export const playingPads = createSelector(
   ormSelector,
   activeCounts,
+  ormCreateSelector(orm, (session, importantCounts) => {
+    const trick = importantCounts.map(count => count.pads);
+
+    return trick;
+  })
+);
+
+export const pulsingPads = createSelector(
+  ormSelector,
+  activeCountsPulse,
   ormCreateSelector(orm, (session, importantCounts) => {
     const trick = importantCounts.map(count => count.pads);
 

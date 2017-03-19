@@ -1,4 +1,3 @@
-// @flow
 import column from '../column';
 const state_1 = 0
 const state_2 = 15

@@ -7,7 +7,7 @@ function animation(props) {
   return keyframes`
 
     to {
-      opacity: 0.925;
+      opacity: 0.875;
     }
   `;
 }

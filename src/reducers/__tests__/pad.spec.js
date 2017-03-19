@@ -1,4 +1,3 @@
-// @flow
 import pad from '../pad';
 
 const action_TOGGLE_PAD = {
